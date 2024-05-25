@@ -194,6 +194,11 @@
                             18. Style single post content editor WP
                         </a>
                     </li>
+                    <li data-topic="Modify excerpt">
+                        <a href="javascript:void(0)" onclick="scrollToSection('mv4')">
+                            19. Enable second logo option in customizer
+                        </a>
+                    </li>
 
                 </ul>
             </div>
@@ -1682,6 +1687,70 @@ skip_mail: on
           </div>
         </div>
       </div>
+</code>
+                                </pre>
+                        </span>
+                    </div>
+                </li>
+                <li id="mv4">
+                    <div>
+                        <h3>
+                            <span class="text">
+                                19. Enable second logo option in customizer
+                            </span>
+                        </h3>
+
+                        <span class="function">
+                            <pre class="line-numbers">
+<code class="language-php">function southperthcricket_customize_register( $wp_customize ) {
+    // Add a section for the secondary logo
+    $wp_customize->add_section( 'my_second_logo' , array(
+        'title'      => __( 'Dark Logo', 'southperthcricket' ),
+        'priority'   => 30,
+    ) );
+
+    // Add a setting for the second logo image
+    $wp_customize->add_setting('second_logo', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+
+    // Add a control to upload the second logo image
+    $wp_customize->add_control(
+        new WP_Customize_Image_Control(
+            $wp_customize,
+            'second_logo_control', // Unique ID for the control
+            array(
+                'label'      => __( 'Upload a dark logo', 'southperthcricket' ),
+                'section'    => 'my_second_logo',
+                'settings'   => 'second_logo' // Match the setting ID
+            )
+        )
+    );
+}
+add_action( 'customize_register', 'southperthcricket_customize_register' );
+
+
+
+
+
+/**
+ another way below logo 
+ * add mobile version of logo
+ */
+function secondary_logo_customize_register( $wp_customize ) {
+    $wp_customize->add_setting( 'secondary_logo' ); // Add setting for logo uploader
+         
+    // Add control for logo uploader (actual uploader)
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'secondary_logo', array(
+        'label'    => __( 'Secondary Logo', 'm1' ),
+        'section'  => 'title_tagline',
+        'settings' => 'secondary_logo',
+    ) ) );
+}
+add_action( 'customize_register', 'secondary_logo_customize_register' );
+
+get_theme_mod( 'my_site_logo_id' );
 </code>
                                 </pre>
                         </span>
