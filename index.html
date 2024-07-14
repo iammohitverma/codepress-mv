@@ -199,6 +199,16 @@
                             19. Enable second logo option in customizer
                         </a>
                     </li>
+                    <li data-topic="Modify excerpt">
+                        <a href="javascript:void(0)" onclick="scrollToSection('mv5')">
+                            20. Previous and next post links
+                        </a>
+                    </li>
+                    <li data-topic="Modify excerpt">
+                        <a href="javascript:void(0)" onclick="scrollToSection('mv6')">
+                            21. Get all related categories in current single post
+                        </a>
+                    </li>
 
                 </ul>
             </div>
@@ -1687,6 +1697,65 @@ skip_mail: on
           </div>
         </div>
       </div>
+</code>
+                                </pre>
+                        </span>
+                    </div>
+                </li>
+
+                <li id="mv5">
+                    <div>
+                        <h3>
+                            <span class="text">
+                                20. Previous and next post links
+                            </span>
+                        </h3>
+
+                        <span class="function">
+                            <pre class="line-numbers">
+<code class="language-php"><?php
+$previous_post = get_previous_post();
+$next_post = get_next_post();
+?>
+<?php if ($previous_post): ?>
+    &lt;div class="nav-previous <?php if(!$previous_post){} ?>">
+        <?php previous_post_link('%link', '&larr; Previous Post'); ?>
+    &lt;/div>
+<?php endif; ?>
+
+<?php if ($next_post): ?>
+    &lt;div class="nav-next">
+        <?php next_post_link('%link', 'Next Post &rarr;'); ?>
+    &lt;/div>
+<?php endif; ?>
+</code>
+                                </pre>
+                        </span>
+                    </div>
+                </li>
+                <li id="mv6">
+                    <div>
+                        <h3>
+                            <span class="text">
+                                21. Get all related categories in current single post
+                            </span>
+                        </h3>
+
+                        <span class="function">
+                            <pre class="line-numbers">
+<code class="language-php"> <?php
+    $taxonomy = 'news-category'; // Your custom taxonomy
+    $categories = get_the_terms(get_the_ID(), $taxonomy);
+
+    if ($categories && !is_wp_error($categories)) {
+        foreach ($categories as $cat) {
+            $catName = esc_html($cat->name);
+            $catSlug = esc_html($cat->slug);
+            
+            echo '<a href="javascript:void(0)" class="post-category">' . $catName . '</a> ';
+        }
+    } 
+?>
 </code>
                                 </pre>
                         </span>
