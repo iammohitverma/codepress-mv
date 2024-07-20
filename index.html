@@ -209,6 +209,16 @@
                             21. Get all related categories in current single post
                         </a>
                     </li>
+                    <li data-topic="Modify excerpt">
+                        <a href="javascript:void(0)" onclick="scrollToSection('mv7')">
+                            22. Replaces the default excerpt editor with TinyMCE
+                        </a>
+                    </li>
+                    <li data-topic="Modify excerpt">
+                        <a href="javascript:void(0)" onclick="scrollToSection('mv8')">
+                            23. Contact form 7 dom events
+                        </a>
+                    </li>
 
                 </ul>
             </div>
@@ -1822,6 +1832,112 @@ $next_post = get_next_post();
         }
     } 
 ?>
+</code>
+                                </pre>
+                        </span>
+                    </div>
+                </li>
+                <li id="mv7">
+                    <div>
+                        <h3>
+                            <span class="text">
+                                22. Replaces the default excerpt editor with TinyMCE
+                            </span>
+                        </h3>
+
+                        <span class="function">
+                            <pre class="line-numbers">
+<code class="language-php"> /**
+    * Replaces the default excerpt editor with TinyMCE.
+    */
+   class T5_Richtext_Excerpt
+   {
+       /**
+        * Replaces the meta boxes.
+        *
+        * @return void
+        */
+       public static function switch_boxes()
+       {
+           global $post;
+   
+           if (!post_type_supports($post->post_type, 'excerpt')) {
+               return;
+           }
+   
+           remove_meta_box(
+               'postexcerpt', // ID
+               'team',        // Screen
+               'normal'       // Context
+           );
+   
+           add_meta_box(
+               'postexcerpt2',           // Reusing just 'postexcerpt' doesn't work.
+               __('Excerpt'),            // Title
+               array(__CLASS__, 'show'), // Display function
+               'team',                   // Screen
+               'normal',                 // Context
+               'core'                    // Priority
+           );
+       }
+   
+       /**
+        * Output for the meta box.
+        *
+        * @param  object $post
+        * @return void
+        */
+       public static function show($post)
+       {
+           ?>
+           <label class="screen-reader-text" for="excerpt"><?php _e('Excerpt'); ?></label>
+           <?php
+           // We use the default name, 'excerpt', so we don’t have to care about
+           // saving, other filters etc.
+           wp_editor(
+               self::unescape($post->post_excerpt),
+               'excerpt',
+               array(
+                   'textarea_rows' => 15,
+                   'media_buttons' => false,
+                   'teeny'         => true,
+                   'tinymce'       => true
+               )
+           );
+       }
+   
+       /**
+        * The excerpt is escaped usually. This breaks the HTML editor.
+        *
+        * @param  string $str
+        * @return string
+        */
+       public static function unescape($str)
+       {
+           return str_replace(
+               array('&lt;', '&gt;', '&quot;', '&amp;', '&nbsp;', '&amp;nbsp;'),
+               array('<', '>', '"', '&', ' ', ' '),
+               $str
+           );
+       }
+   }
+</code>
+                                </pre>
+                        </span>
+                    </div>
+                </li>
+                <li id="mv8">
+                    <div>
+                        <h3>
+                            <span class="text">
+                                23. Contact form 7 dom events
+                            </span>
+                        </h3>
+
+                        <span class="function">
+                            <pre class="line-numbers">
+<code class="language-php">Contact form 7 dom events
+https://contactform7.com/dom-events/
 </code>
                                 </pre>
                         </span>
