@@ -224,6 +224,11 @@
                             24. Allow SVG
                         </a>
                     </li>
+                    <li data-topic="Modify excerpt">
+                        <a href="javascript:void(0)" onclick="scrollToSection('mv10')">
+                            25. Single post page according category
+                        </a>
+                    </li>
 
                 </ul>
             </div>
@@ -1992,6 +1997,85 @@ add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mime
             </style>';
     }
     add_action( 'admin_head', 'fix_svg' );
+</code>
+                                </pre>
+                        </span>
+                    </div>
+                </li>
+                <li id="mv10">
+                    <div>
+                        <h3>
+                            <span class="text">
+                                25. Single post page according category
+                            </span>
+                        </h3>
+
+                        <span class="function">
+                            <pre class="line-numbers">
+<code class="language-php">
+    &lt;?php
+    get_header(); // Load the header
+    
+    // Start the loop to display the post
+    if ( have_posts() ) :
+        while ( have_posts() ) : the_post();
+    
+            // Check if the post is in the 'Mango' category
+            if ( in_category( 'mango' ) ) {
+                // Custom layout for Mango category
+                ?>
+                &lt;div class="mango-layout">
+                    &lt;h1>&lt;?php the_title(); ?>&lt;/h1>
+                    &lt;div class="post-content">
+                        &lt;?php the_content(); ?>
+                    &lt;/div>
+                    &lt;p>This is a custom layout for Mango posts.&lt;/p>
+                &lt;/div>
+                &lt;?php
+    
+            // Check if the post is in the 'Banana' category
+            } elseif ( in_category( 'banana' ) ) {
+                // Custom layout for Banana category
+                ?>
+                &lt;div class="banana-layout">
+                    &lt;h1>&lt;?php the_title(); ?>&lt;/h1>
+                    &lt;div class="post-content">
+                        &lt;?php the_content(); ?>
+                    &lt;/div>
+                    &lt;p>This is a custom layout for Banana posts.&lt;/p>
+                &lt;/div>
+                &lt;?php
+    
+            // Check if the post is in the 'Grapes' category
+            } elseif ( in_category( 'grapes' ) ) {
+                // Custom layout for Grapes category
+                ?>
+                &lt;div class="grapes-layout">
+                    &lt;h1>&lt;?php the_title(); ?>&lt;/h1>
+                    &lt;div class="post-content">
+                        &lt;?php the_content(); ?>
+                    &lt;/div>
+                    &lt;p>This is a custom layout for Grapes posts.&lt;/p>
+                &lt;/div>
+                &lt;?php
+    
+            } else {
+                // Default layout for other posts
+                ?>
+                &lt;div class="default-layout">
+                    &lt;h1>&lt;?php the_title(); ?>&lt;/h1>
+                    &lt;div class="post-content">
+                        &lt;?php the_content(); ?>
+                    &lt;/div>
+                &lt;/div>
+                &lt;?php
+            }
+    
+        endwhile;
+    endif;
+    
+    get_footer(); // Load the footer
+    ?>    
 </code>
                                 </pre>
                         </span>
