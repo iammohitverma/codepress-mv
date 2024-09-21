@@ -229,6 +229,11 @@
                             25. Single post page according category
                         </a>
                     </li>
+                    <li data-topic="Modify excerpt">
+                        <a href="javascript:void(0)" onclick="scrollToSection('mv11')">
+                            26. Unable to open config-synced.php for reading and writing
+                        </a>
+                    </li>
 
                 </ul>
             </div>
@@ -2076,6 +2081,29 @@ add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mime
     
     get_footer(); // Load the footer
     ?>    
+</code>
+                                </pre>
+                        </span>
+                    </div>
+                </li>
+                <li id="mv11">
+                    <div>
+                        <h3>
+                            <span class="text">
+                                26. Unable to open config-synced.php for reading and writing
+                            </span>
+                        </h3>
+
+                        <span class="function">
+                            <pre class="line-numbers">
+<code class="language-php">
+    https://wordpress.org/support/topic/unable-to-open-config-synced-php-for-reading-and-writing/
+    
+    https://www.wordfence.com/help/firewall/mysqli-storage-engine/
+
+    
+    define('WFWAF_STORAGE_ENGINE', 'mysqli');
+    in config.php or wordfence-waf.php” file:
 </code>
                                 </pre>
                         </span>
