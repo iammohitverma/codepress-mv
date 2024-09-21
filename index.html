@@ -234,6 +234,11 @@
                             26. Unable to open config-synced.php for reading and writing
                         </a>
                     </li>
+                    <li data-topic="Modify excerpt">
+                        <a href="javascript:void(0)" onclick="scrollToSection('mv12')">
+                            27. Multiple pages redirect to single page
+                        </a>
+                    </li>
 
                 </ul>
             </div>
@@ -2104,6 +2109,27 @@ add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mime
     
     define('WFWAF_STORAGE_ENGINE', 'mysqli');
     in config.php or wordfence-waf.php” file:
+</code>
+                                </pre>
+                        </span>
+                    </div>
+                </li>
+                <li id="mv12">
+                    <div>
+                        <h3>
+                            <span class="text">
+                                27. Multiple pages redirect to single page
+                            </span>
+                        </h3>
+                        <img src="./assets/images/image_2024_09_17T03_58_20_234Z (2).png" alt="">
+
+                        <span class="function">
+                            <pre class="line-numbers">
+
+<code class="language-php">Multiple pages redirect to single page 
+Source URL: /core-team/(.*)
+target URL: /people
+using redirection plugin
 </code>
                                 </pre>
                         </span>
