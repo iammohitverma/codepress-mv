@@ -244,6 +244,16 @@
                             28. Download PDF link from gdrive for webflow
                         </a>
                     </li>
+                    <li data-topic="Modify excerpt">
+                        <a href="javascript:void(0)" onclick="scrollToSection('mv14')">
+                            29. Remove content editor from posts and pages
+                        </a>
+                    </li>
+                    <li data-topic="Modify excerpt">
+                        <a href="javascript:void(0)" onclick="scrollToSection('mv15')">
+                            30. set X-Frame-Options SAMEORIGIN OR DENY
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -2150,6 +2160,41 @@ using redirection plugin
                             <pre class="line-numbers">
 <code class="language-php">https://drive.google.com/uc?export=download&id=FILE_ID
 https://drive.google.com/uc?export=download&id=1h9ShiAYPV6w-Cq5lRvALY5FFkIceHmTV
+</code>
+                                </pre>
+                        </span>
+                    </div>
+                </li>
+                <li id="mv14">
+                    <div>
+                        <h3>
+                            <span class="text">
+                                29. Remove content editor from posts and pages
+                            </span>
+                        </h3>
+                        <span class="function">
+                            <pre class="line-numbers">
+<code class="language-php">// Remove content editor from posts and pages
+add_action( 'init', function() {
+    remove_post_type_support( 'post', 'editor' ); // Remove editor from posts
+    remove_post_type_support( 'page', 'editor' ); // Remove editor from pages
+}, 99);
+</code>
+                                </pre>
+                        </span>
+                    </div>
+                </li>
+                <li id="mv15">
+                    <div>
+                        <h3>
+                            <span class="text">
+                                30. set X-Frame-Options SAMEORIGIN OR DENY
+                            </span>
+                        </h3>
+                        <span class="function">
+                            <pre class="line-numbers">
+<code class="language-php">//Here's an easier one-liner to set X-Frame-Options SAMEORIGIN OR DENY that works, add the following to the functions.php file in your current Wordpress theme:
+add_action( 'send_headers', 'send_frame_options_header', 10, 0 );
 </code>
                                 </pre>
                         </span>
